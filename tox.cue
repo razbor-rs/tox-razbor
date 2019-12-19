@@ -114,13 +114,13 @@ types: {
 
     onion_request_1: seq: [
         nonce, public_key,
-        { id: "payload", "size-eos": true },
+        { id: "payload", size: "_io.size - _io.pos - onion_return._sizeof" },
         { id: "onion_return", "size": 59 },
     ]
 
     onion_request_2: seq: [
         nonce, public_key,
-        { id: "payload", "size-eos": true },
+        { id: "payload", size: "_io.size - _io.pos - onion_return._sizeof" },
         { id: "onion_return", "size": 118 },
     ]
 
