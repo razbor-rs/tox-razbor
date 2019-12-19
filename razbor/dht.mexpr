@@ -1,0 +1,85 @@
+def[DhtPacket, or[
+    PingRequest,
+    PingResponse,
+
+    NodesRequest,
+    NodesResponse,
+
+    CookieRequest,
+    CookieResponse,
+
+    CryptoHandshake,
+    CryptoData,
+
+    DhtRequest,
+    LanDiscovery,
+    BootstrapInfo
+]],
+
+ty[PingRequest, [
+    and[0x00, u1],
+    ty[public_key, PublicKey],
+    ty[nonce, Nonce],
+    ty[payload, bytes[24]]
+]],
+ty[PingResponse, [
+    and[0x01, u1],
+    ty[public_key, PublicKey],
+    ty[nonce, Nonce],
+    ty[payload, bytes[24]]
+]],
+
+ty[NodesRequest, [
+    and[0x03, u1],
+    ty[public_key, PublicKey],
+    ty[payload, bytes[56]]
+]],
+ty[NodesResponse, [
+    and[0x04, u1],
+    ty[public_key, PublicKey],
+    ty[nonce, Nonce],
+    ty[number, u1],
+    ty[payload, bytes[_]]
+]],
+
+ty[CookieRequest, [
+    and[0x18, u1],
+    ty[public_key, PublicKey],
+    ty[nonce, Nonce],
+    ty[payload, bytes[88]]
+]],
+ty[CookieResponse, [
+    and[0x19, u1],
+    ty[nonce, Nonce],
+    ty[payload, bytes[136]]
+]],
+
+ty[CryptoHandshake, [
+    and[0x1a, u1],
+    ty[cookie_nonce, Nonce],
+    ty[cookie, bytes[88]],
+    ty[payload_nonce, Nonce],
+    ty[payload, bytes[248]]
+]],
+ty[CryptoData, [
+    and[0x1b, u1],
+    ty[nonce_last_two, bytes[2]],
+    ty[payload, bytes[_]]
+]],
+
+ty[DhtRequest, [
+    and[0x20, u1],
+    ty[receiver_pk, PublicKey],
+    ty[sender_pk, PublicKey],
+    ty[nonce, Nonce],
+    ty[payload, bytes[_]]
+]],
+ty[LanDiscovery, [
+    and[0x21, u1],
+    ty[public_key, PublicKey]
+]],
+ty[BootstrapInfo, [
+    and[0xf0, u1],
+    ty[version, u4],
+    ty[motd, bytes[_]]
+]]

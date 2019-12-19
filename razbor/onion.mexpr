@@ -1,0 +1,63 @@
+ty[OnionRequest0, [
+    and[0x80, u1],
+    ty[nonce, Nonce],
+    ty[public_key, PublicKey],
+    ty[payload, bytes[_]]
+]],
+ty[OnionRequest1, [
+    and[0x81, u1],
+    ty[nonce, Nonce],
+    ty[public_key, PublicKey],
+    ty[payload, bytes[_]],
+    ty[onion_return, bytes[59]]
+]],
+ty[OnionRequest2, [
+    and[0x82, u1],
+    ty[nonce, Nonce],
+    ty[public_key, PublicKey],
+    ty[payload, bytes[_]],
+    ty[onion_return, bytes[118]]
+]],
+
+ty[AnnounceRequest, [
+    and[0x83, u1],
+    ty[nonce, Nonce],
+    ty[public_key, PublicKey],
+    ty[payload, bytes[_]],
+]],
+ty[AnnounceResponse, [
+    and[0x84, u1],
+    ty[sendback, u8],
+    ty[nonce, Nonce],
+    ty[payload, bytes[_]]
+]],
+
+ty[OnionDataRequest, [
+    and[0x85, u1],
+    ty[destination_pk, PublicKey],
+    ty[nonce, Nonce],
+    ty[temporary_pk, PublicKey],
+    ty[payload, bytes[_]]
+]],
+ty[OnionDataResponse, [
+    and[0x86, u1],
+    ty[nonce, Nonce],
+    ty[public_key, PublicKey],
+    ty[payload, bytes[_]],
+]],
+
+ty[OnionResponse3, [
+    and[0x8c, u1],
+    ty[onion_return, bytes[177]],
+    ty[payload, bytes[_]],
+]],
+ty[OnionResponse3, [
+    and[0x8d, u1],
+    ty[onion_return, bytes[118]],
+    ty[payload, bytes[_]],
+]],
+ty[OnionResponse3, [
+    and[0x8e, u1],
+    ty[onion_return, bytes[59]],
+    ty[payload, bytes[_]],
+]]
