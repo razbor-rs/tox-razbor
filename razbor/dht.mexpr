@@ -69,7 +69,7 @@ ty[CookieRequestPayload, [
     ty[public_key, PublicKey],
     arr[0, 32],
     ty[id, u8],
-]]
+]],
 ty[CookieResponse, [
     and[0x19, u1],
     ty[nonce, Nonce],
@@ -100,7 +100,7 @@ ty[CryptoHandshakePayload, [
     ty[session_pk, PublicKey],
     ty[cookie_hash, Sha512],
     ty[cookie, EncryptedCookie],
-]]
+]],
 ty[CryptoData, [
     and[0x1b, u1],
     ty[nonce_last_two, bytes[2]],
@@ -110,7 +110,7 @@ ty[CryptoDataPayload, [
     ty[buffer_start, u4],
     ty[packet_number, u4],
     ty[data, bytes[_]]
-]]
+]],
 
 ty[DhtRequest, [
     and[0x20, u1],
@@ -168,5 +168,5 @@ ty[MaxMotdLength, 256],
 ty[BootstrapInfo, [
     and[0xf0, u1],
     ty[version, u4],
-    ty[motd, bytes[le[_. MaxMotdLength]]]
-]]
+    ty[motd, bytes[le[_, MaxMotdLength]]]
+]],

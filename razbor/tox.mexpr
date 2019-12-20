@@ -1,16 +1,16 @@
 ann[razbor_version, "0.0.1"],
 import[
     dht,
-//    friend_connection,
-//    messenger,
+    friend_connection,
+    messenger,
     onion,
 //    state_format,
-    relay
+//    relay
 ],
 
 ty[Packet, or[
-    DhtPacket,
-    OnionPacket,
+    dht.DhtPacket,
+    onion.OnionPacket,
 ]],
 
 ty[PublicKey, bytes[32]],

@@ -1,0 +1,14 @@
+ty[FcPacket, or[Alive, ShareRelays, FriendRequests]],
+
+ty[Alive, [
+    and[0x10, u1]
+]],
+ty[ShareRelays, [
+    and[0x11, u1],
+    ty[relays, and[size[le[_, 153]], arr[PackedNode, _]]]
+]],
+ty[FriendRequests, [
+    and[0x12, u1],
+    ty[nospam, NoSpam],
+    ty[message, bytes[_]]
+]],

@@ -1,0 +1,58 @@
+ty[MessengerPacket, or[
+    Online,
+    Action,
+    Offline,
+    Message,
+    Nickname,
+    UserStatus,
+    Typing,
+    StatusMessage,
+    Msi,
+    ConferencePacket,
+    FileTransferPacket,
+]],
+
+ty[Online, [
+    and[0x18, u1]
+]],
+ty[Action, [
+    and[0x41, u1],
+    ty[msg, str[le[_, 1372]]]
+]],
+ty[Offline, [
+    and[0x19, u1]
+]],
+ty[Message, [
+    and[0x40, u1],
+    ty[msg, str[le[_, 1372]]]
+]],
+ty[Nickname, [
+    and[0x30, u1],
+    ty[nickname, str[le[_, 128]]]
+]],
+ty[PeerStatus, or[
+    Online,
+    Away,
+    Busy,
+]],
+def[Online, and[0, u1]],
+def[Away, and[1, u1]],
+def[Busy, and[2, u1]],
+ty[UserStatus, [
+    and[0x32, u1],
+    ty[status, PeerStatus]
+]],
+
+ty[TypingStatus, or[NotTyping, IsTyping]],
+def[NotTyping, and[0, u1]],
+def[IsTyping, and[1, u1]],
+ty[Typing, [
+    and[0x33, u1],
+    ty[status, TypingStatus]
+]],
+ty[StatusMessage, [
+    and[0x31, u1],
+    ty[msg, str[le[_, 1007]]],
+]],
+
+// TODO
