@@ -22,11 +22,19 @@ ty[PingRequest, [
     ty[nonce, Nonce],
     ty[payload, bytes[24]]
 ]],
+ty[PingRequestPayload, [
+    and[0x00, u1],
+    ty[id, u8]
+]]
 ty[PingResponse, [
     and[0x01, u1],
     ty[public_key, PublicKey],
     ty[nonce, Nonce],
     ty[payload, bytes[24]]
+]],
+ty[PingResponsePayload, [
+    and[0x01, u1],
+    ty[id, u8],
 ]],
 
 ty[NodesRequest, [
@@ -34,12 +42,21 @@ ty[NodesRequest, [
     ty[public_key, PublicKey],
     ty[payload, bytes[56]]
 ]],
+ty[NodesRequestPayload, [
+    ty[public_key, PublicKey],
+    ty[id, u8],
+]],
 ty[NodesResponse, [
     and[0x04, u1],
     ty[public_key, PublicKey],
     ty[nonce, Nonce],
     ty[number, u1],
-    ty[payload, bytes[_]]
+    ty[payload, bytes[and[ge[_, 25], le[_, 229]]]]
+]],
+ty[NodesResponsePayload, [
+    ty[_number, and[le[_, 4], u1]],
+    ty[nodes, and[size[le[_, 204]], arr[PackedNode, _number]]],
+    ty[id, u8]
 ]],
 
 ty[CookieRequest, [
@@ -48,24 +65,52 @@ ty[CookieRequest, [
     ty[nonce, Nonce],
     ty[payload, bytes[88]]
 ]],
+ty[CookieRequestPayload, [
+    ty[public_key, PublicKey],
+    arr[0, 32],
+    ty[id, u8],
+]]
 ty[CookieResponse, [
     and[0x19, u1],
     ty[nonce, Nonce],
     ty[payload, bytes[136]]
 ]],
+ty[CookieResponsePayload, [
+    ty[cookie, EncryptedCookie],
+    ty[id, u64]
+]],
+ty[EncryptedCookie, [
+    ty[nonce, Nonce],
+    ty[payload, bytes[88]],
+]],
+ty[Cookie, [
+    ty[time, u8],
+    ty[real_pk, PublicKey],
+    ty[dht_pk, PublicKey],
+]],
 
 ty[CryptoHandshake, [
     and[0x1a, u1],
-    ty[cookie_nonce, Nonce],
-    ty[cookie, bytes[88]],
-    ty[payload_nonce, Nonce],
+    ty[cookie, EncryptedCookie],
+    ty[nonce, Nonce],
     ty[payload, bytes[248]]
 ]],
+ty[CryptoHandshakePayload, [
+    ty[base_nonce, Nonce],
+    ty[session_pk, PublicKey],
+    ty[cookie_hash, Sha512],
+    ty[cookie, EncryptedCookie],
+]]
 ty[CryptoData, [
     and[0x1b, u1],
     ty[nonce_last_two, bytes[2]],
     ty[payload, bytes[_]]
 ]],
+ty[CryptoDataPayload, [
+    ty[buffer_start, u4],
+    ty[packet_number, u4],
+    ty[data, bytes[_]]
+]]
 
 ty[DhtRequest, [
     and[0x20, u1],
@@ -74,12 +119,54 @@ ty[DhtRequest, [
     ty[nonce, Nonce],
     ty[payload, bytes[_]]
 ]],
+ty[DhtRequestPayload, or[
+    NatPingRequest,
+    NatPingResponse,
+    DhtPkAnnounce,
+    HardeningRequest,
+    HardeningResponse,
+]],
+ty[NatPingRequest, [
+    and[0xfe, u1],
+    and[0x00, u1],
+    ty[id, u8]
+]],
+ty[NatPingResponse, [
+    and[0xfe, u1],
+    and[0x01, u1],
+    ty[id, u8]
+]],
+ty[DhtPkAnnounce, [
+    and[0x9c, u1],
+    ty[real_pk, PublicKey],
+    ty[nonce, Nonce],
+    ty[payload, bytes[_]]
+]],
+ty[DhtPkAnnouncePayload, [
+    and[0x9c, u1],
+    ty[no_reply, u8],
+    ty[dht_pk, PublicKey],
+    ty[nodes, arr[TcpUdpPackedNode, le[_, 4]]]
+]],
+ty[HardeningRequest, [
+    and[0x30, u1],
+    and[0x02, u1],
+    bytes[_]
+]],
+ty[HardeningResponse, [
+    and[0x30, u1],
+    and[0x03, u1],
+    bytes[_]
+]],
+
 ty[LanDiscovery, [
     and[0x21, u1],
     ty[public_key, PublicKey]
 ]],
+
+ty[MaxMotdLength, 256],
 ty[BootstrapInfo, [
     and[0xf0, u1],
     ty[version, u4],
-    ty[motd, bytes[_]]
+    ty[motd, bytes[le[_. MaxMotdLength]]]
 ]]
