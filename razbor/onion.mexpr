@@ -51,12 +51,12 @@ ty[OnionResponse3, [
     ty[onion_return, bytes[177]],
     ty[payload, bytes[_]],
 ]],
-ty[OnionResponse3, [
+ty[OnionResponse2, [
     and[0x8d, u1],
     ty[onion_return, bytes[118]],
     ty[payload, bytes[_]],
 ]],
-ty[OnionResponse3, [
+ty[OnionResponse1, [
     and[0x8e, u1],
     ty[onion_return, bytes[59]],
     ty[payload, bytes[_]],
