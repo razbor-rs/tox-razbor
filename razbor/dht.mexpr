@@ -16,6 +16,12 @@ def[DhtPacket, or[
     BootstrapInfo
 ]],
 
+ty[PackedNode, [
+    ty[addr, IpAddr],
+    ty[port, u2],
+    ty[pk, PublicKey],
+]],
+
 ty[PingRequest, [
     and[0x00, u1],
     ty[public_key, PublicKey],
@@ -142,12 +148,12 @@ ty[DhtPkAnnounce, [
     ty[nonce, Nonce],
     ty[payload, bytes[_]]
 ]],
-ty[DhtPkAnnouncePayload, [
-    and[0x9c, u1],
-    ty[no_reply, u8],
-    ty[dht_pk, PublicKey],
-    ty[nodes, arr[TcpUdpPackedNode, le[_, 4]]]
-]],
+// ty[DhtPkAnnouncePayload, [
+//     and[0x9c, u1],
+//     ty[no_reply, u8],
+//     ty[dht_pk, PublicKey],
+//     ty[nodes, arr[TcpUdpPackedNode, le[_, 4]]]
+// ]],
 ty[HardeningRequest, [
     and[0x30, u1],
     and[0x02, u1],

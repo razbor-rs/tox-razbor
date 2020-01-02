@@ -2,7 +2,7 @@ ann[razbor_version, "0.0.1"],
 import[
     dht,
     friend_connection,
-    messenger,
+//    messenger,
     onion,
 //    state_format,
 //    relay
@@ -15,3 +15,17 @@ ty[Packet, or[
 
 ty[PublicKey, bytes[32]],
 ty[Nonce, bytes[24]],
+ty[NoSpam, bytes[4]],
+
+ty[IpAddr, or[
+    Ipv4Addr,
+    Ipv6Addr
+]],
+ty[Ipv4Addr, [
+    and[0x02, u1],
+    ty[data, bytes[4]]
+]],
+ty[Ipv6Addr, [
+    and[0x0a, u1],
+    ty[data, bytes[16]]
+]],

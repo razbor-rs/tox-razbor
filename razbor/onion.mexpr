@@ -1,3 +1,19 @@
+def[OnionPacket, or[
+    OnionRequest0,
+    OnionRequest1,
+    OnionRequest2,
+
+    AnnounceRequest,
+    AnnounceResponse,
+
+    OnionDataRequest,
+    OnionDataResponse,
+
+    OnionResponse3,
+    OnionResponse2,
+    OnionResponse1
+]],
+
 ty[OnionRequest0, [
     and[0x80, u1],
     ty[nonce, Nonce],
