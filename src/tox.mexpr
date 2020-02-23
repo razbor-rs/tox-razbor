@@ -1,4 +1,5 @@
-ann[razbor_version, "0.0.1"],
+meta[razbor_version, "0.0.1"],
+
 import[
     dht,
     friend_connection,

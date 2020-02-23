@@ -1,3 +1,3 @@
-# Tox-ksy
+# Tox-razbor
 
-A [Kaitai Struct](https://kaitai.io/) specification for the Tox procotol, written in [CUE](https://cuelang.org/).
+A [Razbor](https://github.com/suhr/razbor) specification for the Tox procotol.
