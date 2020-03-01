@@ -3,10 +3,10 @@ meta[razbor_version, "0.0.1"],
 import[
     dht,
     friend_connection,
-//    messenger,
+    // messenger,
     onion,
-//    state_format,
-//    relay
+    // state_format,
+    // relay
 ],
 
 ty[Packet, or[
@@ -30,3 +30,6 @@ ty[Ipv6Addr, [
     and[0x0a, u1],
     ty[data, bytes[16]]
 ]],
+
+// TODO: replace this with something else?
+ty[Sha512, bytes[64]],
